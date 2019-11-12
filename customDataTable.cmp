@@ -1,0 +1,39 @@
+<aura:component implements="force:appHostable" controller="customDataTablesController">
+    
+	<aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    
+    <aura:attribute name="allAccounts" type="Account[]" />
+    
+	<lightning:card title="Custom Data Table">
+
+		<table class="slds-table slds-table_cell-buffer slds-table_bordered">
+			<thead>
+				<tr class="slds-line-height_reset">
+					<th class="slds-text-title_caps" scope="col">
+						<div class="slds-truncate" title="Account Name">Account Name</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div class="slds-truncate" title="Account Type">Account Type</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div class="slds-truncate" title="Industry">Industry</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div class="slds-truncate" title="Rating">Rating</div>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				 <!-- We are not trying to display the records related information
+				 here, rather, we are trying to pass every snigle record to 
+				 another child component <c:customDataTableRow /> and this child component will take 
+				 care of getting the fields of a record displayed. -->
+
+				<aura:iteration items="{! v.allAccounts }" var="accountRec">
+					<c:customDataTableRow account="{!accountRec}"/>
+				</aura:iteration>
+			</tbody>
+		</table>
+	</lightning:card>
+	
+</aura:component>
