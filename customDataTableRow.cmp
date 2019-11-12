@@ -1,0 +1,33 @@
+<aura:component controller="customDataTablesController">
+    
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    
+    <aura:attribute name="options" type="List" access="PRIVATE"/>
+    <aura:attribute name="selectedValue" type="String" access="PRIVATE"/>
+    <aura:attribute name="account" type="Account" />
+    
+    <tr class="slds-hint-parent">
+        <td data-label="{!v.account.Name}" scope="row">
+            <div class="slds-truncate" title="{!v.account.Name}">{!v.account.Name}</div>
+        </td>
+        <td data-label="{!v.account.Type}">
+            <div class="slds-truncate" title="{!v.account.Type}">{!v.account.Type}</div>
+        </td>
+        <td data-label="{!v.account.Industry}">
+            <div class="slds-truncate" title="{!v.account.Industry}">{!v.account.Industry}</div>
+        </td>
+        <td data-label="{!v.account.Rating}">
+            <div class="slds-truncate" title="{!v.account.Rating}">
+
+                <!-- This is where we get the dyanamic values from the client-side
+                controller and display it here -->
+                <lightning:select name="colorId" aura:id="colorId" value="{!v.selectedValue}">
+                    <aura:iteration items="{!v.options}" var="option">
+                        <option text="{!option.label}" value="{!option.id}" selected="{!option.selected}"/>
+                    </aura:iteration>
+                </lightning:select>
+                
+            </div>
+        </td> 
+    </tr>
+</aura:component>
