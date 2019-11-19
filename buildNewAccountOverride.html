@@ -1,0 +1,58 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride"
+                access="global">
+    
+    <aura:attribute name="progressIndicatorFlag" type="String" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" /> 
+    
+    <lightning:recordEditForm aura:id="accountRecordCreator" 
+                              onsuccess="{!c.handleSuccess}"
+                              objectApiName="Account">
+        <lightning:messages />
+        
+        <div class="demo-only" style="height: 640px;">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" 
+                     aria-modal="true" aria-describedby="modal-content-id-1" 
+                     class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                            <lightning:icon iconName="utility:close" alternativeText="Account" />
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Account</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        
+                        
+                        <lightning:progressIndicator type="path" currentStep="{!v.progressIndicatorFlag}">
+                            <lightning:progressStep label="Step One" value="step1"/>
+                            <lightning:progressStep label="Step Two" value="step2"/>
+                            <lightning:progressStep label="Step Three" value="step3"/>
+                        </lightning:progressIndicator>
+                        
+                        <div aura:id="stepOne">
+                            <lightning:inputField fieldName="Name" />
+                            <lightning:button label="Next" onclick="{!c.goToStepTwo}" variant="brand"/> 
+                        </div>
+                        <div aura:id="stepTwo">
+                            <lightning:inputField fieldName="Industry" />
+                            <lightning:button label="Back" onclick="{!c.goBackToStepOne}" />
+                            <lightning:button label="Next" onclick="{!c.goToStepThree}" variant="brand"/> 
+                        </div>
+                        <div aura:id="stepThree">
+                            <lightning:inputField fieldName="Rating" />
+                            <lightning:button label="Back" onclick="{!c.goBackToStepTwo}"/>
+                            <lightning:button label="Save" type="submit" variant="brand"/> 
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open overlay"></div>
+        </div>
+        
+    </lightning:recordEditForm>
+</aura:component>
